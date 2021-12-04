@@ -3,13 +3,10 @@ export interface StateVariable {
   slot: string;
   offset: number;
   type: string;
+  color?: string;
 }
 
-export interface Row {
+export interface ContractStorageLayout {
   name: string;
   stateVariables: StateVariable[];
-}
-
-export interface Table {
-  contracts: Row[];
 }

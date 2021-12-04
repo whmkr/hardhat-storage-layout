@@ -1,15 +1,15 @@
 import { Table } from "console-table-printer";
 
-import { Row } from "./types";
+import { ContractStorageLayout } from "./types";
 
 export class Prettify {
-  public table: Row[];
+  public table: ContractStorageLayout[];
 
-  constructor(data: Row[]) {
+  constructor(data: ContractStorageLayout[]) {
     this.table = data;
   }
 
-  public get(): Row[] {
+  public get(): ContractStorageLayout[] {
     return this.table;
   }
 
@@ -38,7 +38,7 @@ export class Prettify {
               storage_slot: stateVariable.slot,
               offset: stateVariable.offset,
               type: stateVariable.type
-            });
+            },{color: stateVariable.color?stateVariable.color:"white"});
           }
           p.printTable();
         }

@@ -1,8 +1,8 @@
-import { Row } from "./types";
+import { ContractStorageLayout } from "./types";
 export declare class Prettify {
-    table: Row[];
-    constructor(data: Row[]);
-    get(): Row[];
+    table: ContractStorageLayout[];
+    constructor(data: ContractStorageLayout[]);
+    get(): ContractStorageLayout[];
     tabulate(): void;
 }
 //# sourceMappingURL=prettifier.d.ts.map

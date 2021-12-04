@@ -34,7 +34,7 @@ class Prettify {
                             storage_slot: stateVariable.slot,
                             offset: stateVariable.offset,
                             type: stateVariable.type
-                        });
+                        }, { color: stateVariable.color ? stateVariable.color : "white" });
                     }
                     p.printTable();
                 }
