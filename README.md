@@ -11,29 +11,6 @@ Generate Ethereum smart contract storage layout with Hardhat. This plugin saves 
 yarn add --dev hardhat-storage-layout
 ```
 
-## Configuration
-
-In order to use this Hardhat plugin, you should update the solidity compiler configurations in `hardhat.congig.js` as follows:
-
-```javascript
-module.exports = {
-  solidity: {
-    version: '0.8.3',
-    settings: {
-        optimizer: {
-            enabled: true,
-            runs: 1000,
-        },
-        outputSelection: {
-            "*": {
-                "*": ["storageLayout"],
-            },
-          },
-    },
-  },
-  ....
-```
-
 ## Usage
 - Add this plugin to `hardhat.config.js`:
 
@@ -42,6 +19,12 @@ require('hardhat-storage-layout');
 ```
 - Compile your contracts
 - Export the contracts storage layout prior deployment as follows:
+
+```shell
+$ npx hardhat storage
+```
+
+or
 
 ```javascript
 const hre = require("hardhat");
