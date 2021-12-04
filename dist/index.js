@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PluginName = void 0;
 const task_names_1 = require("hardhat/builtin-tasks/task-names");
 const config_1 = require("hardhat/config");
+const plugins_1 = require("hardhat/plugins");
 const path_1 = __importDefault(require("path"));
 const storageLayout_1 = require("./storageLayout");
 require("./type-extensions");
@@ -13,6 +14,9 @@ exports.PluginName = "hardhat-storage-layout";
 config_1.task(task_names_1.TASK_CHECK).setAction(async (args, hre, runSuper) => {
     await hre.storageLayout.export();
     await runSuper(args);
+});
+config_1.task("storage").setAction(async (args, hre) => {
+    await hre.storageLayout.export();
 });
 config_1.extendConfig((config, userConfig) => {
     var _a;
@@ -43,8 +47,7 @@ config_1.extendConfig((config, userConfig) => {
     }
 });
 config_1.extendEnvironment(hre => {
-    console.log(hre.storageLayout);
-    hre.storageLayout = new storageLayout_1.StorageLayout(hre);
+    hre.storageLayout = plugins_1.lazyObject(() => new storageLayout_1.StorageLayout(hre));
 });
 module.exports = {};
 //# sourceMappingURL=index.js.map

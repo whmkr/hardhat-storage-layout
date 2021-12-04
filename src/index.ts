@@ -14,6 +14,10 @@ task(TASK_CHECK).setAction(async (args, hre, runSuper) => {
   await runSuper(args);
 });
 
+task("storage").setAction(async(args, hre) => {
+  await hre.storageLayout.export();
+});
+
 extendConfig(
   (config: HardhatConfig, userConfig: Readonly<HardhatUserConfig>) => {
     const storageLayoutUserPath = userConfig.paths?.newStorageLayoutPath;
@@ -47,8 +51,7 @@ extendConfig(
 );
 
 extendEnvironment(hre => {
-  console.log(hre.storageLayout);
-  hre.storageLayout = new StorageLayout(hre);
+  hre.storageLayout = lazyObject(() => new StorageLayout(hre));
 });
 
 module.exports = {};
