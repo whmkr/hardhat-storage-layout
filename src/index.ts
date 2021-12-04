@@ -14,7 +14,7 @@ task(TASK_CHECK).setAction(async (args, hre, runSuper) => {
   await runSuper(args);
 });
 
-task("storage").setAction(async(args, hre) => {
+task("storage", "prints storage slot for all contracts").setAction(async(args, hre) => {
   await hre.storageLayout.export();
 });
 

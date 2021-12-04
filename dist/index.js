@@ -15,7 +15,7 @@ config_1.task(task_names_1.TASK_CHECK).setAction(async (args, hre, runSuper) => 
     await hre.storageLayout.export();
     await runSuper(args);
 });
-config_1.task("storage").setAction(async (args, hre) => {
+config_1.task("storage", "prints storage slot for all contracts").setAction(async (args, hre) => {
     await hre.storageLayout.export();
 });
 config_1.extendConfig((config, userConfig) => {
