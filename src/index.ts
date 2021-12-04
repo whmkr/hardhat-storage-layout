@@ -47,6 +47,7 @@ extendConfig(
 );
 
 extendEnvironment(hre => {
+  console.log(hre.storageLayout);
   hre.storageLayout = new StorageLayout(hre);
 });
 

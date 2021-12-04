@@ -4,7 +4,6 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import path from "path";
 
 import { Prettify } from "./prettifier";
-import "./type-extensions";
 import { Row, Table } from "./types";
 
 export class StorageLayout {
