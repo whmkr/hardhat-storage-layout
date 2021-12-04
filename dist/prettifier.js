@@ -11,34 +11,36 @@ class Prettify {
     }
     tabulate() {
         if (!this.table.length) {
-            console.error("Table has empty feilds");
+            console.error("Table has empty fields");
         }
         else {
-            const p = new console_table_printer_1.Table({
-                columns: [
-                    { name: "contract", alignment: "left" },
-                    { name: "state_variable", alignment: "left" },
-                    { name: "storage_slot", alignment: "center" },
-                    { name: "offset", alignment: "center" },
-                    { name: "type", alignment: "left" }
-                ]
-            });
             try {
                 for (const contract of this.table) {
+                    const p = new console_table_printer_1.Table({
+                        title: contract.name,
+                        columns: [
+                            { name: "state_variable", alignment: "left" },
+                            { name: "storage_slot", alignment: "center" },
+                            { name: "offset", alignment: "center" },
+                            { name: "type", alignment: "left" }
+                        ]
+                    });
+                    if (contract.stateVariables.length == 0) {
+                        continue;
+                    }
                     for (const stateVariable of contract.stateVariables) {
                         p.addRow({
-                            contract: contract.name,
                             state_variable: stateVariable.name,
                             storage_slot: stateVariable.slot,
                             offset: stateVariable.offset,
                             type: stateVariable.type
                         });
                     }
+                    p.printTable();
                 }
-                p.printTable();
             }
             catch (e) {
-                console.log(e); // TODO HRE error handler
+                console.log(e);
             }
         }
     }
