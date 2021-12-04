@@ -32,31 +32,22 @@ extendConfig(
     }
 
     config.paths.newStorageLayoutPath = newStorageLayoutPath;
-    const userSoliditySetting = userConfig.solidity;
-
-    if(typeof(userSoliditySetting) === 'string') {
-      userSoliditySetting = {
-        version: userSoliditySetting,
+    config.solidity.compilers = config.solidity.compilers.map(x => {
+      if(x.settings.outputSelection["*"]["*"].find(x => x === "storageLayout") === undefined){
+        x.settings.outputSelection["*"]["*"].push("storageLayout");
+      }
+      return x;
+    });
+    for(let k of Object.keys(config.solidity.overrides)){
+      if(config.solidity.overrides[k].settings.outputSelection["*"]["*"].find(x => x === "storageLayout") === undefined) {
+        config.solidity.overrides[k].settings.outputSelection["*"]["*"].push("storageLayout");
       }
     }
-    if(userSoliditySetting.settings === undefined) {
-      userSoliditySetting.settings = {};
-    }
-
-    userSoliditySetting.settings.outputSelection = {
-      "*": {
-        "*": ["storageLayout"],
-      },
-    };
-
-
-    config.solidity = userSoliditySetting;
-
   }
 );
 
 extendEnvironment(hre => {
-  hre.storageLayout = lazyObject(() => new StorageLayout(hre));
+  hre.storageLayout = new StorageLayout(hre);
 });
 
 module.exports = {};
