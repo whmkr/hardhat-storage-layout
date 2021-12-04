@@ -1,6 +1,6 @@
 import fs from "fs";
 import { HardhatPluginError } from "hardhat/plugins";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { HardhatRuntimeEnvironment } from "hardhat/types/runtime";
 import path from "path";
 
 import { Prettify } from "./prettifier";

@@ -37,7 +37,7 @@
     "@types/node": "^8.10.38",
     "chai": "^4.2.0",
     "dotenv": "^6.2.0",
-    "hardhat": "^2.0.3",
+    "hardhat": "^2.7.0",
     "mocha": "^5.2.0",
     "prettier": "^1.17.0",
     "source-map-support": "^0.5.12",
@@ -48,7 +48,7 @@
     "typescript": "^3.4.5"
   },
   "peerDependencies": {
-    "hardhat": "^2.0.3"
+    "hardhat": "^2.7.0"
   },
   "dependencies": {
     "console-table-printer": "^2.9.0"

@@ -1,4 +1,4 @@
-import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { HardhatRuntimeEnvironment } from "hardhat/types/runtime";
 export declare class StorageLayout {
     env: HardhatRuntimeEnvironment;
     constructor(hre: HardhatRuntimeEnvironment);
