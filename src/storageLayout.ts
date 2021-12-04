@@ -14,6 +14,22 @@ export class StorageLayout {
     this.env = hre;
   }
 
+//  public async diff() {
+//  }
+//
+//  public async getLayout( contractName : string) {
+//    const storageLayoutPath = this.env.config.paths.newStorageLayoutPath;
+//    const outputDirectory = path.resolve(storageLayoutPath);
+//    if (!outputDirectory.startsWith(this.env.config.paths.root)) {
+//      throw new HardhatPluginError(
+//        "output directory should be inside the project directory"
+//      );
+//    }
+//    if (!fs.existsSync(outputDirectory)) {
+//      fs.mkdirSync(outputDirectory);
+//    }
+//  }
+
   public async export() {
     const storageLayoutPath = this.env.config.paths.newStorageLayoutPath;
     const outputDirectory = path.resolve(storageLayoutPath);

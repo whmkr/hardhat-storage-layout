@@ -32,6 +32,26 @@ extendConfig(
     }
 
     config.paths.newStorageLayoutPath = newStorageLayoutPath;
+    const userSoliditySetting = userConfig.solidity;
+
+    if(typeof(userSoliditySetting) === 'string') {
+      userSoliditySetting = {
+        version: userSoliditySetting,
+      }
+    }
+    if(userSoliditySetting.settings === undefined) {
+      userSoliditySetting.settings = {};
+    }
+
+    userSoliditySetting.settings.outputSelection = {
+      "*": {
+        "*": ["storageLayout"],
+      },
+    };
+
+
+    config.solidity = userSoliditySetting;
+
   }
 );
 
