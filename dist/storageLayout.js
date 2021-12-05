@@ -41,17 +41,17 @@ class StorageLayout {
                         length: updatedVariable.length,
                         type: updatedVariable.type,
                         color: "green",
-                        change: [],
+                        changes: [],
                     };
                     // when name is different, print yellow 
                     updatedVariable.name === oldVariable.name ?
                         resultVariable.name = updatedVariable.name : (resultVariable.color = "yellow",
-                        resultVariable.change.push(types_1.VariableChange.NameChange),
+                        resultVariable.changes.push(types_1.VariableChange.Name),
                         resultVariable.name = `${oldVariable.name} -> ${updatedVariable.name}`);
                     // when type is different, print yellow 
                     updatedVariable.type === oldVariable.type ?
                         resultVariable.type = updatedVariable.type : (resultVariable.color = "yellow",
-                        resultVariable.change.push(types_1.VariableChange.TypeChange),
+                        resultVariable.changes.push(types_1.VariableChange.Type),
                         resultVariable.type = `${oldVariable.type} -> ${updatedVariable.type}`);
                     res.push(resultVariable);
                     // no need to iterate any furhter
@@ -64,27 +64,27 @@ class StorageLayout {
                     length: updatedVariable.length,
                     type: updatedVariable.type,
                     color: "red",
-                    change: [],
+                    changes: [],
                 };
                 // when name is different
                 updatedVariable.name === oldVariable.name ?
-                    resultVariable.name = updatedVariable.name : (resultVariable.change.push(types_1.VariableChange.NameChange),
+                    resultVariable.name = updatedVariable.name : (resultVariable.changes.push(types_1.VariableChange.Name),
                     resultVariable.name = `${oldVariable.name} -> ${updatedVariable.name}`);
                 // when type is differentw 
                 updatedVariable.type === oldVariable.type ?
-                    resultVariable.type = updatedVariable.type : (resultVariable.change.push(types_1.VariableChange.TypeChange),
+                    resultVariable.type = updatedVariable.type : (resultVariable.changes.push(types_1.VariableChange.Type),
                     resultVariable.type = `${oldVariable.type} -> ${updatedVariable.type}`);
                 // when length is different
                 updatedVariable.length === oldVariable.length ?
-                    resultVariable.length = updatedVariable.length : (resultVariable.change.push(types_1.VariableChange.LengthChange),
+                    resultVariable.length = updatedVariable.length : (resultVariable.changes.push(types_1.VariableChange.Length),
                     resultVariable.length = `${oldVariable.length} -> ${updatedVariable.length}`);
                 // when offset is different
                 updatedVariable.offset === oldVariable.offset ?
-                    resultVariable.offset = updatedVariable.offset : (resultVariable.change.push(types_1.VariableChange.OffsetChange),
+                    resultVariable.offset = updatedVariable.offset : (resultVariable.changes.push(types_1.VariableChange.Offset),
                     resultVariable.offset = `${oldVariable.offset} -> ${updatedVariable.offset}`);
                 // when slot is different
                 updatedVariable.slot === oldVariable.slot ?
-                    resultVariable.slot = updatedVariable.slot : (resultVariable.change.push(types_1.VariableChange.SlotChange),
+                    resultVariable.slot = updatedVariable.slot : (resultVariable.changes.push(types_1.VariableChange.Slot),
                     resultVariable.slot = `${oldVariable.slot} -> ${updatedVariable.slot}`);
                 res.push(resultVariable);
             }
@@ -101,7 +101,7 @@ class StorageLayout {
                     length: updatedVariable.length,
                     type: updatedVariable.type,
                     color: "green",
-                    change: [types_1.VariableChange.NewSlot],
+                    changes: [types_1.VariableChange.NewSlot],
                 };
                 res.push(resultVariable);
             }
@@ -109,7 +109,7 @@ class StorageLayout {
         //print
         diff.stateVariables = res;
         const prettifier = new prettifier_1.Prettify([diff]);
-        prettifier.tabulate();
+        prettifier.tabulateDiff();
     }
     async getLayout(contractNameOrFullyQualifiedName) {
         const { sourceName, contractName } = await this.env.artifacts.readArtifact(contractNameOrFullyQualifiedName);

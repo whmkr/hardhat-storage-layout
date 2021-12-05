@@ -1,10 +1,10 @@
 export enum VariableChange {
     NewSlot,
-    NameChange,
-    TypeChange,
-    LengthChange, 
-    OffsetChange, 
-    SlotChange,  
+    Name,
+    Type,
+    Length, 
+    Offset, 
+    Slot,  
 }
 
 export interface StateVariable {
@@ -14,7 +14,7 @@ export interface StateVariable {
   length: string;
   type: string;
   color?: string;
-  change?: VariableChange[];
+  changes?: VariableChange[];
 }
 
 export interface ContractStorageLayout {
