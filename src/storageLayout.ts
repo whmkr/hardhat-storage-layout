@@ -192,7 +192,11 @@ export class StorageLayout {
 
     const data = await this.getData();
     const prettifier = new Prettify(data);
-    prettifier.tabulate();
+    const markdown = prettifier.toMarkdown();
+    Object.keys(markdown!).forEach((key) => {
+      fs.writeFileSync(`${storageLayoutPath}/${key}.md`, markdown![key]);
+    })
+    console.log(markdown);
     // TODO: export the storage layout to the ./storageLayout/output.md
   }
 }
