@@ -20,9 +20,10 @@ class Prettify {
                         title: contract.name,
                         columns: [
                             { name: "state_variable", alignment: "left" },
+                            { name: "type", alignment: "left" },
                             { name: "storage_slot", alignment: "center" },
                             { name: "offset", alignment: "center" },
-                            { name: "type", alignment: "left" }
+                            { name: "length", alignment: "center" },
                         ]
                     });
                     if (contract.stateVariables.length == 0) {
@@ -33,7 +34,8 @@ class Prettify {
                             state_variable: stateVariable.name,
                             storage_slot: stateVariable.slot,
                             offset: stateVariable.offset,
-                            type: stateVariable.type
+                            type: stateVariable.type,
+                            length: stateVariable.length
                         }, { color: stateVariable.color ? stateVariable.color : "white" });
                     }
                     p.printTable();

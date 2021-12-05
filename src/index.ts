@@ -14,9 +14,18 @@ task(TASK_CHECK).setAction(async (args, hre, runSuper) => {
   await runSuper(args);
 });
 
-task("storage", "prints storage slot for all contracts").setAction(async(args, hre) => {
+task("storage-layout", "prints storage slot for all contracts").setAction(async(args, hre) => {
   await hre.storageLayout.export();
 });
+
+task("storage-check", "prints storage layout diff for updated contract")
+  .addParam("original", "old contract name")
+  .addParam("updated", "new contract name")
+  .setAction( async(args, hre) => {
+    const oldData = await hre.storageLayout.getLayout(args.original);
+    const newData = await hre.storageLayout.getLayout(args.updated);
+    await hre.storageLayout.check(oldData, newData);
+  });
 
 extendConfig(
   (config: HardhatConfig, userConfig: Readonly<HardhatUserConfig>) => {

@@ -15,8 +15,16 @@ config_1.task(task_names_1.TASK_CHECK).setAction(async (args, hre, runSuper) => 
     await hre.storageLayout.export();
     await runSuper(args);
 });
-config_1.task("storage", "prints storage slot for all contracts").setAction(async (args, hre) => {
+config_1.task("storage-layout", "prints storage slot for all contracts").setAction(async (args, hre) => {
     await hre.storageLayout.export();
+});
+config_1.task("storage-check", "prints storage layout diff for updated contract")
+    .addParam("original", "old contract name")
+    .addParam("updated", "new contract name")
+    .setAction(async (args, hre) => {
+    const oldData = await hre.storageLayout.getLayout(args.original);
+    const newData = await hre.storageLayout.getLayout(args.updated);
+    await hre.storageLayout.check(oldData, newData);
 });
 config_1.extendConfig((config, userConfig) => {
     var _a;

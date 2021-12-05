@@ -1,1 +1,1 @@
-{"version":3,"file":"prettifier.d.ts","sourceRoot":"","sources":["../src/prettifier.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,qBAAqB,EAAE,MAAM,SAAS,CAAC;AAEhD,qBAAa,QAAQ;IACZ,KAAK,EAAE,qBAAqB,EAAE,CAAC;gBAE1B,IAAI,EAAE,qBAAqB,EAAE;IAIlC,GAAG,IAAI,qBAAqB,EAAE;IAI9B,QAAQ;CAkChB"}
+{"version":3,"file":"prettifier.d.ts","sourceRoot":"","sources":["../src/prettifier.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,qBAAqB,EAAE,MAAM,SAAS,CAAC;AAEhD,qBAAa,QAAQ;IACZ,KAAK,EAAE,qBAAqB,EAAE,CAAC;gBAE1B,IAAI,EAAE,qBAAqB,EAAE;IAIlC,GAAG,IAAI,qBAAqB,EAAE;IAI9B,QAAQ;CAoChB"}
