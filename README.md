@@ -35,21 +35,25 @@ async function main() {
 ```
 
 ```
-┌─────────────────┬────────────────┬──────────────┬────────┬─────────────────────────────────────────────────────┐
-│ contract        │ state_variable │ storage_slot │ offset │ type                                                │
-├─────────────────┼────────────────┼──────────────┼────────┼─────────────────────────────────────────────────────┤
-│ ERC20           │ _balances      │      0       │   0    │ t_mapping(t_address,t_uint256)                      │
-│ ERC20           │ _allowances    │      1       │   0    │ t_mapping(t_address,t_mapping(t_address,t_uint256)) │
-│ ERC20           │ _totalSupply   │      2       │   0    │ t_uint256                                           │
-│ ERC20           │ _name          │      3       │   0    │ t_string_storage                                    │
-│ ERC20           │ _symbol        │      4       │   0    │ t_string_storage                                    │
-│ WatermelonToken │ _balances      │      0       │   0    │ t_mapping(t_address,t_uint256)                      │
-│ WatermelonToken │ _allowances    │      1       │   0    │ t_mapping(t_address,t_mapping(t_address,t_uint256)) │
-│ WatermelonToken │ _totalSupply   │      2       │   0    │ t_uint256                                           │
-│ WatermelonToken │ _name          │      3       │   0    │ t_string_storage                                    │
-│ WatermelonToken │ _symbol        │      4       │   0    │ t_string_storage                                    │
-└─────────────────┴────────────────┴──────────────┴────────┴─────────────────────────────────────────────────────┘
-
+                               Greeter
+┌────────────────┬──────────────────┬──────────────┬────────┬────────┐
+│ state_variable │ type             │ storage_slot │ offset │ length │
+├────────────────┼──────────────────┼──────────────┼────────┼────────┤
+│ count          │ t_uint256        │      0       │   0    │  256   │
+│ greeting       │ t_string_storage │      1       │   0    │  256   │
+│ a              │ t_bool           │      2       │   0    │   8    │
+│ b              │ t_uint128        │      2       │   1    │  128   │
+│ c              │ t_uint128        │      3       │   0    │  128   │
+└────────────────┴──────────────────┴──────────────┴────────┴────────┘
+                                GreeterNew
+┌────────────────┬───────────────────────┬──────────────┬────────┬────────┐
+│ state_variable │ type                  │ storage_slot │ offset │ length │
+├────────────────┼───────────────────────┼──────────────┼────────┼────────┤
+│ name           │ t_string_storage      │      0       │   0    │  256   │
+│ greetingnew    │ t_string_storage      │      1       │   0    │  256   │
+│ a              │ t_struct(A)71_storage │      2       │   0    │  512   │
+│ count          │ t_uint256             │      4       │   0    │  256   │
+└────────────────┴───────────────────────┴──────────────┴────────┴────────┘
 ```
 
 - **contract**: is the name of the contract including its path as prefix
@@ -57,3 +61,4 @@ async function main() {
 - **offset**: is the offset in bytes within the storage slot according to the encoding
 - **storage slot**: is the storage slot where the state variable resides or starts. This number may be very large and therefore its JSON value is represented as a string.
 - **type**: is an identifier used as key to the variable’s type information (described in the following)
+- **length**: size of the variable is occupying, represented in bit size(256 == 1slot)
