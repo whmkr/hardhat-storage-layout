@@ -108,8 +108,8 @@ class StorageLayout {
         }
         //print
         diff.stateVariables = res;
-        const prettifier = new prettifier_1.Prettify([diff]);
-        prettifier.tabulateDiff();
+        const prettifier = new prettifier_1.PrettifyDiff([diff]);
+        prettifier.tabulate();
     }
     async getLayout(contractNameOrFullyQualifiedName) {
         const { sourceName, contractName } = await this.env.artifacts.readArtifact(contractNameOrFullyQualifiedName);
@@ -130,7 +130,7 @@ class StorageLayout {
     }
     async print(contracts) {
         const data = await this.getData();
-        const prettifier = new prettifier_1.Prettify(data);
+        const prettifier = new prettifier_1.PrettifyStorage(data);
         prettifier.tabulate();
     }
     async getData(contracts) {
@@ -160,7 +160,7 @@ class StorageLayout {
             fs_1.default.mkdirSync(outputDirectory);
         }
         const data = await this.getData();
-        const prettifier = new prettifier_1.Prettify(data);
+        const prettifier = new prettifier_1.PrettifyStorage(data);
         const markdown = prettifier.toMarkdown();
         Object.keys(markdown).forEach((key) => {
             fs_1.default.writeFileSync(`${storageLayoutPath}/${key}.md`, markdown[key]);

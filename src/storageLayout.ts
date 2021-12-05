@@ -3,7 +3,7 @@ import { HardhatPluginError } from "hardhat/plugins";
 import { HardhatRuntimeEnvironment } from "hardhat/types/runtime";
 import path from "path";
 
-import { Prettify } from "./prettifier";
+import { PrettifyStorage, PrettifyDiff } from "./prettifier";
 import { VariableChange, StateVariable, ContractStorageLayout } from "./types";
 
 export class StorageLayout {
@@ -127,8 +127,8 @@ export class StorageLayout {
   
     //print
     diff.stateVariables = res;
-    const prettifier = new Prettify([diff]);
-    prettifier.tabulateDiff();
+    const prettifier = new PrettifyDiff([diff]);
+    prettifier.tabulate();
   }
 
   public async getLayout( contractNameOrFullyQualifiedName : string) : Promise<ContractStorageLayout>{
@@ -156,7 +156,7 @@ export class StorageLayout {
 
   public async print(contracts?: string[]) {
     const data = await this.getData();
-    const prettifier = new Prettify(data);
+    const prettifier = new PrettifyStorage(data);
     prettifier.tabulate();
   }
 
@@ -191,7 +191,7 @@ export class StorageLayout {
     }
 
     const data = await this.getData();
-    const prettifier = new Prettify(data);
+    const prettifier = new PrettifyStorage(data);
     const markdown = prettifier.toMarkdown();
     Object.keys(markdown!).forEach((key) => {
       fs.writeFileSync(`${storageLayoutPath}/${key}.md`, markdown![key]);

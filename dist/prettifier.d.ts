@@ -1,9 +1,15 @@
 import { ContractStorageLayout } from "./types";
-export declare class Prettify {
+export declare class PrettifyDiff {
     table: ContractStorageLayout[];
     constructor(data: ContractStorageLayout[]);
     get(): ContractStorageLayout[];
-    tabulateDiff(): void;
+    tabulate(): void;
+    toMarkdown(): Record<string, string> | undefined;
+}
+export declare class PrettifyStorage {
+    table: ContractStorageLayout[];
+    constructor(data: ContractStorageLayout[]);
+    get(): ContractStorageLayout[];
     toMarkdown(): Record<string, string> | undefined;
     tabulate(): void;
 }
