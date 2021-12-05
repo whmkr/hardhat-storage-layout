@@ -196,7 +196,5 @@ export class StorageLayout {
     Object.keys(markdown!).forEach((key) => {
       fs.writeFileSync(`${storageLayoutPath}/${key}.md`, markdown![key]);
     })
-    console.log(markdown);
-    // TODO: export the storage layout to the ./storageLayout/output.md
   }
 }
