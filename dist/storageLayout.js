@@ -14,9 +14,10 @@ class StorageLayout {
         this.env = hre;
     }
     async check(oldData, newData) {
-        // TODO: check
-        // if variable name changed => yellow
-        // if variable type changed => red
+        // TODO
+        // 1. add log level
+        // 2. add assertion on error
+        // 3. (Optional) etherscan support for oldData
         let diff = { name: `diff ${oldData.name} -> ${newData.name}`, stateVariables: [] };
         let res = [];
         // non-zero slots
@@ -127,24 +128,29 @@ class StorageLayout {
         }
         return contract;
     }
-    async printAll() {
+    async print(contracts) {
         const data = await this.getData();
         const prettifier = new prettifier_1.Prettify(data);
         prettifier.tabulate();
     }
-    async getData() {
+    async getData(contracts) {
+        // if contracts === null, get all data
         const data = [];
-        for (const fullName of await this.env.artifacts.getAllFullyQualifiedNames()) {
-            const contract = await this.getLayout(fullName);
-            data.push(contract);
+        if (contracts === undefined) {
+            for (const fullName of await this.env.artifacts.getAllFullyQualifiedNames()) {
+                const contract = await this.getLayout(fullName);
+                data.push(contract);
+            }
+        }
+        else {
+            for (const name of contracts) {
+                const contract = await this.getLayout(name);
+                data.push(contract);
+            }
         }
         return data;
     }
-    async exportData(data) {
-        const prettifier = new prettifier_1.Prettify(data);
-        prettifier.tabulate();
-    }
-    async export() {
+    async export(contracts) {
         const storageLayoutPath = this.env.config.paths.newStorageLayoutPath;
         const outputDirectory = path_1.default.resolve(storageLayoutPath);
         if (!outputDirectory.startsWith(this.env.config.paths.root)) {
@@ -154,7 +160,8 @@ class StorageLayout {
             fs_1.default.mkdirSync(outputDirectory);
         }
         const data = await this.getData();
-        await this.exportData(data);
+        const prettifier = new prettifier_1.Prettify(data);
+        prettifier.tabulate();
         // TODO: export the storage layout to the ./storageLayout/output.md
     }
 }

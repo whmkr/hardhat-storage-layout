@@ -14,9 +14,10 @@ export class StorageLayout {
   }
 
   public async check( oldData: ContractStorageLayout, newData: ContractStorageLayout) {
-    // TODO: check
-    // if variable name changed => yellow
-    // if variable type changed => red
+    // TODO
+    // 1. add log level
+    // 2. add assertion on error
+    // 3. (Optional) etherscan support for oldData
     let diff : ContractStorageLayout = { name : `diff ${oldData.name} -> ${newData.name}`, stateVariables:[] };
 
     let res : Array<StateVariable> = [];
@@ -153,28 +154,31 @@ export class StorageLayout {
     return contract;
   }
 
-  public async printAll() {
+  public async print(contracts?: string[]) {
     const data = await this.getData();
     const prettifier = new Prettify(data);
     prettifier.tabulate();
   }
 
-  public async getData() : Promise<Array<ContractStorageLayout>> {
+  public async getData(contracts?: string[]) : Promise<Array<ContractStorageLayout>> {
+    // if contracts === null, get all data
     const data: Array<ContractStorageLayout>= [];
 
-    for (const fullName of await this.env.artifacts.getAllFullyQualifiedNames()) {
-      const contract = await this.getLayout(fullName);
-      data.push(contract);
+    if(contracts === undefined) {
+      for (const fullName of await this.env.artifacts.getAllFullyQualifiedNames()) {
+        const contract = await this.getLayout(fullName);
+        data.push(contract);
+      }
+    } else {
+      for (const name of contracts) {
+        const contract = await this.getLayout(name);
+        data.push(contract);
+      }
     }
     return data;
   }
 
-  public async exportData(data: ContractStorageLayout[]) {
-    const prettifier = new Prettify(data);
-    prettifier.tabulate();
-  }
-
-  public async export() {
+  public async export(contracts?: string[]) {
     const storageLayoutPath = this.env.config.paths.newStorageLayoutPath;
     const outputDirectory = path.resolve(storageLayoutPath);
     if (!outputDirectory.startsWith(this.env.config.paths.root)) {
@@ -187,7 +191,8 @@ export class StorageLayout {
     }
 
     const data = await this.getData();
-    await this.exportData(data);
+    const prettifier = new Prettify(data);
+    prettifier.tabulate();
     // TODO: export the storage layout to the ./storageLayout/output.md
   }
 }

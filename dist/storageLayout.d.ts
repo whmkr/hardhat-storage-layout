@@ -5,9 +5,8 @@ export declare class StorageLayout {
     constructor(hre: HardhatRuntimeEnvironment);
     check(oldData: ContractStorageLayout, newData: ContractStorageLayout): Promise<void>;
     getLayout(contractNameOrFullyQualifiedName: string): Promise<ContractStorageLayout>;
-    printAll(): Promise<void>;
-    getData(): Promise<Array<ContractStorageLayout>>;
-    exportData(data: ContractStorageLayout[]): Promise<void>;
-    export(): Promise<void>;
+    print(contracts?: string[]): Promise<void>;
+    getData(contracts?: string[]): Promise<Array<ContractStorageLayout>>;
+    export(contracts?: string[]): Promise<void>;
 }
 //# sourceMappingURL=storageLayout.d.ts.map
